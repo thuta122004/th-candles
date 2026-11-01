@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-6">
+
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
+        <div class="mb-6 text-center">
+            <h2 class="text-2xl font-bold text-slate-800">Get in Touch</h2>
+            <p class="text-sm text-slate-500 mt-1">We'd love to hear from you. Drop us a message!</p>
+        </div>
+
+        <form id="contactForm" class="space-y-5">
+            <div>
+                <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Your Name</label>
+                <input type="text" id="name" placeholder="Su Su" required
+                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors text-sm" />
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Your Email</label>
+                <input type="email" id="email" placeholder="susu@gmail.com" required
+                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors text-sm" />
+            </div>
+
+            <div>
+                <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Your Message</label>
+                <textarea id="message" rows="4" placeholder="Write your message here..." required
+                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors text-sm resize-none"></textarea>
+            </div>
+
+            <button type="submit"
+                class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-md shadow-indigo-100 hover:shadow-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all text-sm">
+                Send Message
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            const response = await fetch('http://localhost:5678/webhook/a07f3e81-5846-447a-850d-0c597a174c9e', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                alert('Sent successfully!');
+                document.getElementById('contactForm').reset();
+            } else {
+                alert('Failed to send.');
+            }
+        });
+    </script>
+</body>
+
+</html>
