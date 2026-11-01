@@ -50,7 +50,7 @@
                 message: document.getElementById('message').value
             };
 
-            const response = await fetch('http://localhost:5678/webhook/a07f3e81-5846-447a-850d-0c597a174c9e', {
+            const response = await fetch('https://th-candles.serveousercontent.com/webhook/a07f3e81-5846-447a-850d-0c597a174c9e', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
